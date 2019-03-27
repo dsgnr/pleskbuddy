@@ -13,7 +13,8 @@ PleskBuddy is a script packed with useful commands to make using Plesk easier.
     --list-components  Creates a list of available components
     --install-component COMPONENT_INSTALL
                         Allows installation of available component
-
+    --php-handler       Displays a list of domains with their respective PHP
+                        handler
 
 #### Listing Plesk subscriptions
 Outputs a list of subscriptions
@@ -58,7 +59,7 @@ Creates a list of components that are either installed, updatable, or available 
         [...]
 
 #### Install an available Plesk component
-Allows the installation of an available component. A package highlighted as `[install]` 
+Allows the installation of an available component. A package highlighted as `[install]`
 must be given as an argument from `--list-components`
 
     ➜ ./pleskbuddy.py --install-component php5.5
@@ -70,3 +71,20 @@ must be given as an argument from `--list-components`
     Installing: plesk-php55-xml-5.5.38-centos7.17090117.x86_64 [4/30]
 
     The changes were applied successfully.
+
+
+#### List domain PHP handlers
+Outputs a list of domains with their respective PHP handler
+
+    ➜  ./pleskbuddy.py --php-handler
+    ==== Plesk domains and their PHP handler ====
+    +-------------------------------+-----------------+
+    | name                          | php_handler_id  |
+    +-------------------------------+-----------------+
+    | 431848-pleskOnyx.racker.co.uk | fpm             |
+    | example1.com                  | plesk-php70-fpm |
+    | example2.com                  | plesk-php71-fpm |
+    | example3.com                  | plesk-php72-fpm |
+    | example4.com                  | plesk-php56-fpm |
+    | rafa9006.com                  | plesk-php72-fpm |
+    +-------------------------------+-----------------+

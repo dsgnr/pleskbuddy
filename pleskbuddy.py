@@ -24,6 +24,8 @@ def options():
                             action='store_true', help='Creates a list of available components')
     psa_parser.add_argument('--install-component', dest='component_install', type=str,
                             help='Allows installation of available component')
+    psa_parser.add_argument('--php-handler', dest='php_handler',
+                            action='store_true', help='Displays a list of domains with their respective PHP handler')
     return psa_parser
 
 
@@ -88,18 +90,27 @@ def component_install():
           '--install-component', PSA_ARGS.component_install])
 
 
+def php_handler():
+    print(Color.MAGENTA + '==== Plesk domains and their PHP handler ====' + Color.RESET)
+    domains_with_php = 'plesk db "select d.name,h.php_handler_id from domains d join hosting h on h.dom_id=d.id"'
+    call(domains_with_php, shell=True)
+
+
 def main():
     if PSA_ARGS.show_version:
-        return show_version()
-    if PSA_ARGS.subscription_list:
-        return subscription_list()
-    if PSA_ARGS.domain_list:
-        return domain_list()
-    if PSA_ARGS.show_components:
-        return show_components()
-    if PSA_ARGS.component_install:
-        return component_install()
-    return PSA_PARSER
+        show_version()
+    elif PSA_ARGS.subscription_list:
+        subscription_list()
+    elif PSA_ARGS.domain_list:
+        domain_list()
+    elif PSA_ARGS.show_components:
+        show_components()
+    elif PSA_ARGS.component_install:
+        component_install()
+    elif PSA_ARGS.php_handler:
+        php_handler()
+    else:
+        options()
 
 
 if __name__ == '__main__':
