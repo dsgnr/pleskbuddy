@@ -16,6 +16,15 @@ PleskBuddy is a script packed with useful commands to make using Plesk easier.
     --php-handler       Displays a list of domains with their respective PHP
                         handler
 
+#### Info
+Outputs a block of information for the user
+
+    ➜ ./plesbuddy.py --info
+    ==== Plesk Information ====
+    Login URL: https://<public_ip_address>:8443/login?secret=<secret_random_login_string>
+    Plesk version: 17.9.12
+    Domain Count: 5
+
 #### Listing Plesk subscriptions
 Outputs a list of subscriptions
 

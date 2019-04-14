@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/python
 # pleskbuddy.py created by Dan Hand
 
 from __future__ import absolute_import, division, print_function
@@ -6,7 +6,8 @@ from __future__ import absolute_import, division, print_function
 # Standard Library
 import argparse
 import sys
-from subprocess import call
+from subprocess import call, PIPE, Popen
+from urllib2 import urlopen
 
 
 __version__ = '1.0.0'
@@ -17,6 +18,8 @@ def options():
     psa_parser.add_argument('-v', '--version', dest='show_version',
                             action='store_true', help='Shows version information')
     psa_parser.add_argument('--sub-list', dest='subscription_list',
+                            action='store_true', help='Shows a list of subscriptions')
+    psa_parser.add_argument('--info', dest='info',
                             action='store_true', help='Shows a list of subscriptions')
     psa_parser.add_argument('--domain-list', dest='domain_list',
                             action='store_true', help='Shows a list of domains with their IP addresses')
@@ -62,6 +65,19 @@ def show_version():
     |_|                                             |___/
 
     version: %s ''' % (__version__), Color.RESET)
+
+
+def info():
+    domain_count = Popen('MYSQL_PWD=`cat /etc/psa/.psa.shadow` mysql -u admin -Dpsa -sNe \
+                         "select count(*) from domains"', stdout=PIPE, shell=True).communicate()[0].strip()
+    plesk_version = open('/usr/local/psa/version', "r").read().split()
+    login_url = Popen('plesk login -relative-url', stdout=PIPE, shell=True).communicate()[0].strip()
+    public_ip = urlopen('https://ipv4.icanhazip.com').read().strip()
+    psa_info = (Color.MAGENTA + '==== Plesk Information ====\n' + Color.RESET +
+                Color.MAGENTA + 'Login URL: ' + Color.RESET + 'https://{0}:8443{1}\n' + Color.MAGENTA +
+                'Plesk version: ' + Color.RESET + '{2}\n' + Color.MAGENTA +
+                'Domain Count: ' + Color.RESET + '{3}').format(public_ip, login_url, plesk_version[0], str(domain_count))
+    print(psa_info)
 
 
 def subscription_list():
@@ -110,7 +126,7 @@ def main():
     elif PSA_ARGS.php_handler:
         php_handler()
     else:
-        options()
+        info()
 
 
 if __name__ == '__main__':
