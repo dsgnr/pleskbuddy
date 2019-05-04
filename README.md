@@ -1,7 +1,7 @@
 ## Plesk Buddy
 
 [![Build Status](https://travis-ci.org/dsgnr/pleskbuddy.svg?branch=master)](https://travis-ci.org/dsgnr/pleskbuddy)
-[![Build Status](https://jenkins.handsoff.cloud/buildStatus/icon?job=pleskbuddy%2Fjenkins-implementation)](https://jenkins.handsoff.cloud/job/pleskbuddy/job/jenkins-implementation/)
+[![Build Status](https://jenkins.handsoff.cloud/buildStatus/icon?job=pleskbuddy%2Fmaster)](https://jenkins.handsoff.cloud/job/pleskbuddy/job/master/)
 ![GitHub All Releases](https://img.shields.io/github/downloads/dsgnr/pleskbuddy/total.svg)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dsgnr/pleskbuddy.svg)
 
