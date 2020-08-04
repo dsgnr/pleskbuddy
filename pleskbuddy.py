@@ -109,9 +109,9 @@ def main():
     # Check if Plesk is installed
     try:
         _ = open('/usr/local/psa/version', 'r')
-    except IOError as ex:
+    except IOError:
         sys.exit('It doesn\'t look like Plesk is installed!')
-    
+
     if PSA_ARGS.show_version:
         show_version()
     elif PSA_ARGS.subscription_list:
