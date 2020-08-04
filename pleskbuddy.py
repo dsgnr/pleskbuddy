@@ -108,7 +108,7 @@ def php_handler():
 def main():
     # Check if Plesk is installed
     try:
-        _ =open('/usr/local/psa/version', 'r')
+        _ = open('/usr/local/psa/version', 'r')
     except IOError as ex:
         sys.exit('It doesn\'t look like Plesk is installed!')
     
