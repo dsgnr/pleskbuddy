@@ -1,2 +1,2 @@
 pylint==2.9.6
-pycodestyle==2.8.0
+pycodestyle==2.10.0
